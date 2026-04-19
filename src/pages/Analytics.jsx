@@ -125,17 +125,6 @@ const Analytics = () => {
     handleAnalyze();
   }, [handleAnalyze]);
 
-  return (
-    totalPosts: 24,
-    published: 18,
-    drafts: 6,
-    avgEngagement: '4.2%',
-    topPlatform: currentPersona.platform,
-    streakDays: 7,
-    thisWeek: 3,
-    thisMonth: 12,
-  }), [currentPersona.platform]);
-
   const engagementData = [
     { day: 'Mon', value: 65 },
     { day: 'Tue', value: 45 },
@@ -146,21 +135,13 @@ const Analytics = () => {
     { day: 'Sun', value: 42 },
   ];
 
-  const topTopics = [
-    { topic: 'AI & Machine Learning', posts: 8, engagement: 'High' },
-    { topic: 'Web Development', posts: 6, engagement: 'Medium' },
-    { topic: 'Tech Tutorials', posts: 5, engagement: 'High' },
-    { topic: 'Career Tips', posts: 3, engagement: 'Low' },
-    { topic: 'Industry News', posts: 2, engagement: 'Medium' },
-  ];
-
   const handleAnalyze = useCallback(async () => {
     setLoading(true);
     try {
-      const result = await analyzeContentPerformance([], currentPersona);
+      const result = await analyzeContentPerformance(personaPosts, currentPersona);
       setAnalysis(result);
 
-      const recs = getAiRecommendations([], currentPersona);
+      const recs = getAiRecommendations(personaPosts, currentPersona);
       setRecommendations(recs);
     } catch (error) {
       console.error('Analysis failed:', error);
@@ -188,11 +169,11 @@ const Analytics = () => {
     } finally {
       setLoading(false);
     }
-  }, [currentPersona]);
+  }, [currentPersona, personaPosts]);
 
   useEffect(() => {
     handleAnalyze();
-  }, []);
+  }, [handleAnalyze]);
 
   return (
     <div className="space-y-8">
