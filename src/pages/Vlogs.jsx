@@ -3,7 +3,7 @@ import { usePersona } from '../context/PersonaContext';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../services/supabaseClient';
 import { generateVlogDescription } from '../services/aiService';
-import { Video, Plus, Edit, Trash, Sparkles, Youtube, Clock, Tag, TrendingUp } from 'lucide-react';
+import { Video, Plus, Edit, Trash, Sparkles, PlayCircle, Clock, Tag, TrendingUp } from 'lucide-react';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 const initialVlogs = [
@@ -264,7 +264,7 @@ const Vlogs = () => {
               >
                 <div className="flex items-center justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2 text-red-400">
-                    <Youtube className="h-5 w-5" />
+                    <PlayCircle className="h-5 w-5" />
                     <span className="text-sm font-medium">{vlog.platform}</span>
                   </div>
                   <span
