@@ -135,46 +135,6 @@ const Analytics = () => {
     { day: 'Sun', value: 42 },
   ];
 
-  const handleAnalyze = useCallback(async () => {
-    setLoading(true);
-    try {
-      const result = await analyzeContentPerformance(personaPosts, currentPersona);
-      setAnalysis(result);
-
-      const recs = getAiRecommendations(personaPosts, currentPersona);
-      setRecommendations(recs);
-    } catch (error) {
-      console.error('Analysis failed:', error);
-      // Fallback analysis
-      setAnalysis({
-        strategyAssessment: 'Your content strategy shows consistent output with room for improvement in engagement.',
-        consistencyScore: 7,
-        contentGaps: ['More video content', 'Interactive tutorials', 'Case studies'],
-        postingSchedule: {
-          recommendedDays: ['Monday', 'Wednesday', 'Friday'],
-          bestTimes: ['10:00 AM', '2:00 PM', '7:00 PM'],
-          postsPerWeek: 3,
-        },
-        growthOpportunities: [
-          'Collaborate with other creators in your niche',
-          'Create series content for better retention',
-          'Engage more with community comments',
-        ],
-      });
-      setRecommendations([
-        'Focus on creating more video content for higher engagement.',
-        'Post consistently on weekdays at 10 AM for maximum reach.',
-        'Add more interactive elements like polls and Q&As.',
-      ]);
-    } finally {
-      setLoading(false);
-    }
-  }, [currentPersona, personaPosts]);
-
-  useEffect(() => {
-    handleAnalyze();
-  }, [handleAnalyze]);
-
   return (
     <div className="space-y-8">
       <section className="rounded-[32px] border border-slate-800/80 bg-slate-950/80 p-7 shadow-[0_24px_120px_rgba(15,23,42,0.35)]">
